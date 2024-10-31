@@ -40,6 +40,11 @@ class ServicesManagerTest {
 	}
 
 	@Test
+	void printServicesManagersIndex() {
+		assertEquals(false, servicesManager.printServicesManagersIndex());
+	}
+
+	@Test
 	void getServiceTest() {
 		assertNull(servicesManager.getService());
 	}

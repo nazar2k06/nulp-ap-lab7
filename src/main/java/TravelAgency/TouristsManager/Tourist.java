@@ -14,85 +14,23 @@ public class Tourist {
 		tickets = new ArrayList<>();
 	}
 
-	public void close(TicketsManager ticketsManager) {
-		for (Ticket ticket : tickets) {
-			ticket.close(ticketsManager);
-		}
-	}
-
-	@Override
-	public String toString() {
-		String string = getName();
-
-		if (!tickets.isEmpty()) {
-			for (Ticket ticket : tickets) {
-				string += " <" + ticket.getName() + ">";
-			}
-
-			string += " Price: " + getAllPrice();
-		}
-
-		return string;
-	}
-
 	/* --- menu --- */
-	public void menu(TicketsManager ticketsManager) {
-		while (true) {
-			int menu_select = 0;
-
-			System.out.println("\n --- Tourist menu --- ");
-			System.out.println(" 0. Exit");
-			System.out.println(" 1. Print info");
-			System.out.println(" 2. Add ticket");
-			System.out.println(" 3. Delete ticket");
-
-			menu_select = Main.enterIntValue("Select an item:", 0, 3);
-			System.out.println(" --- Tourist menu --- ");
-
-			switch (menu_select) {
-				case 0:
-					return;
-				case 1:
-					printInfo();
-					break;
-				case 2:
-					addTicket(ticketsManager);
-					break;
-				case 3:
-					deleteTicket(ticketsManager);
-					break;
-			}
-		}
+	public int menu(TicketsManager ticketsManager) {
+		return 1;
 	}
 	/* --- menu --- */
 
 	/* --- menu realization--- */
-	private void printInfo() {
-		System.out.println("\n --- Info --- ");
-		System.out.println(this);
-		System.out.println(" --- Info --- ");
-	}
 
-	private void addTicket(TicketsManager ticketsManager) {
+	public void addTicket(TicketsManager ticketsManager) {
 		System.out.println("\n --- Add ticket --- ");
-		Ticket ticket = ticketsManager.getTicket();
+		Ticket ticket = new Ticket();
 
 		if (ticket != null) {
 			appendTicket(ticket);
 		}
 
 		System.out.println(" --- Add ticket --- ");
-	}
-
-	private void deleteTicket(TicketsManager ticketsManager) {
-		System.out.println("\n --- Delete ticket --- ");
-		Ticket ticket = getTicket();
-
-		if (ticket != null) {
-			ticket.close(ticketsManager);
-			removeTicket(ticket);
-		}
-		System.out.println(" --- Delete ticket --- ");
 	}
 	/* --- menu realization--- */
 
@@ -161,12 +99,4 @@ public class Tourist {
 	}
 	/* --- others --- */
 
-	/* --- static methods --- */
-	public static Tourist newTourist() {
-		Tourist tourist = new Tourist();
-		String touristName = Main.enterStringValue("Tourist name: ");
-
-		tourist.setName(touristName);
-		return tourist;
-	}
 }

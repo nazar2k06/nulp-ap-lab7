@@ -22,19 +22,9 @@ public class Ticket {
 		services = new ArrayList<>();
 	}
 
-	public void close(TicketsManager ticketsManager) {
-		ticketsManager.deleteCreatedTicket(this);
-	}
-
 	public Ticket cloneObject() {
-		return new Ticket(getName(), getPrice());
+		return new Ticket(getName(), 0);
 	}
-
-	@Override
-	public String toString() {
-		return String.format("%s - %d $", getName(), getPrice());
-	}
-
 
 	/* --- getters & setters --- */
 	public void setName(String name) {
@@ -78,16 +68,4 @@ public class Ticket {
 		}
 	}
 	/* --- others --- */
-
-	/* --- static methods --- */
-	public static Ticket newTicket() {
-		Ticket ticket = new Ticket();
-		String name = Main.enterStringValue("Ticket name: ");
-		int price = Main.enterIntValue("Ticket price $: ", 0, 10000);
-
-		ticket.setName(name);
-		ticket.setPrice(price);
-
-		return ticket;
-	}
 }

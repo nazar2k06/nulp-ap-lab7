@@ -15,89 +15,34 @@ public class TouristsManager {
 	}
 
 	/* --- menu --- */
-	public void menu(TicketsManager ticketsManager) {
-		while (true) {
-			int menuSelect = 0;
-
-			System.out.println("\n --- Tourists manager menu --- ");
-			System.out.println(" 0. Exit");
-			System.out.println(" 1. Print tourists");
-			System.out.println(" 2. Tourists menu");
-			System.out.println(" 3. Add new tourist");
-			System.out.println(" 4. Delete tourist");
-
-			menuSelect = Main.enterIntValue("Select an item:", 0, 4);
-			System.out.println(" --- Tourists manager menu --- ");
-
-			switch (menuSelect) {
-				case 0:
-					return;
-				case 1:
-					printTourists();
-					break;
-				case 2:
-					touristsMenu(ticketsManager);
-					break;
-				case 3:
-					addTourist();
-					break;
-				case 4:
-					deleteTourist(ticketsManager);
-					break;
-			}
-		}
+	public int menu(TicketsManager ticketsManager) {
+		return 1;
 	}
 	/* --- menu --- */
 
 	/* --- menu realization--- */
-	private void printTourists() {
+	public int printTourists() {
 		System.out.println("\n --- Tourists --- ");
 		if (tourists == null || tourists.isEmpty()) {
-			System.out.println("Tourists list is empty");
-		} else {
-			for (Tourist tourist : tourists) {
-				System.out.println(tourist);
-			}
+			return 0;
 		}
 
-		System.out.println(" --- Tourists --- ");
+		return 1;
 	}
 
-	public void touristsMenu(TicketsManager ticketsManager) {
-		System.out.println("\n --- Tourist menu --- ");
-		Tourist tourist = getTourist();
-
-		if (tourist != null) {
-			tourist.menu(ticketsManager);
-		}
-
-		System.out.println(" --- Tourist menu --- ");
-	}
-
-	private void addTourist() {
+	public void addTourist() {
 		System.out.println("\n --- Add tourist --- ");
-		Tourist tourist = Tourist.newTourist();
+		Tourist tourist = new Tourist();
 
 		if (tourist != null) {
 			appendTourist(tourist);
 		}
 		System.out.println(" --- Add tourist --- ");
 	}
-
-	private void deleteTourist(TicketsManager ticketsManager) {
-		System.out.println("\n --- Delete tourist --- ");
-		Tourist tourist = getTourist();
-
-		if (tourist != null) {
-			tourist.close(ticketsManager);
-			removeTourist(tourist);
-		}
-		System.out.println(" --- Delete tourist --- ");
-	}
 	/* --- menu realization--- */
 
 	/* --- others --- */
-	private boolean printTouristsIndex() {
+	public boolean printTouristsIndex() {
 		if (tourists == null || tourists.isEmpty()) {
 			System.out.println("Tourists list is empty");
 			return false;

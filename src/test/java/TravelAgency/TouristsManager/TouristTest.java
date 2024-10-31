@@ -1,6 +1,7 @@
 package TravelAgency.TouristsManager;
 
 import TravelAgency.TicketsManager.TicketManager.Ticket;
+import TravelAgency.TicketsManager.TicketsManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +16,25 @@ class TouristTest {
 	}
 
 	@Test
+	void menuTest() {
+		assertEquals(1, tourist.menu(new TicketsManager()));
+	}
+
+	@Test
+	void addTicketTest() {
+		tourist.addTicket(new TicketsManager());
+		assertEquals(1, tourist.getTicketsCount());
+	}
+
+	@Test
 	void setAndGetNameTest() {
 		tourist.setName("Nazar");
 		assertEquals("Nazar", tourist.getName());
+	}
+
+	@Test
+	void printTicketsIndexTest() {
+		assertEquals(false, tourist.printTicketsIndex());
 	}
 
 	@Test

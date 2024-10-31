@@ -44,11 +44,21 @@ class TicketManagerTest {
 	}
 
 	@Test
+	void getServicesManagerTest() {
+		assertEquals(null, ticketManager.getServicesManager());
+	}
+
+	@Test
 	void getServicesManagersCountTest() {
 		ticketManager.addServicesManager(new ServicesManager());
 		ticketManager.addServicesManager(new ServicesManager());
 
 		assertEquals(2, ticketManager.getServicesManagersCount());
+	}
+
+	@Test
+	void printServicesManagersIndexTest() {
+		assertEquals(false, ticketManager.printServicesManagersIndex());
 	}
 
 	@Test

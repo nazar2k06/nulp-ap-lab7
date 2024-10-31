@@ -19,11 +19,6 @@ public class Service {
 		return new Service(getName(), getPrice());
 	}
 
-	@Override
-	public String toString() {
-		return String.format("%-10s - %d $", getName(), getPrice());
-	}
-
 	/* --- getters & setters --- */
 	public void setName(String name) {
 		this.name = name;
@@ -42,18 +37,4 @@ public class Service {
 	}
 	/* --- getters & setters --- */
 
-	/* --- static methods --- */
-	public static Service newService() {
-		Service service = new Service();
-		String name;
-		int price;
-
-		name = Main.enterStringValue("Service name: ");
-		price = Main.enterIntValue("Service price $: ", 0, 10000);
-
-		service.setName(name);
-		service.setPrice(price);
-
-		return service;
-	}
 }

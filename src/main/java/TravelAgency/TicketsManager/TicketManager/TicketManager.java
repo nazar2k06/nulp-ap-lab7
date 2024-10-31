@@ -19,29 +19,6 @@ public class TicketManager {
 		createdTickets = new ArrayList<>();
 	}
 
-	public void close(TouristsManager touristsManager) {
-		for (Ticket ticket : createdTickets) {
-			touristsManager.deleteCreatedTicket(ticket);
-		}
-	}
-
-	@Override
-	public String toString() {
-		String string = "\n --- Ticket (" + demoTicket.getName() + ") --- \n";
-		string += String.format("%dx  ", availableCount);
-		string += demoTicket + "\n";
-
-		if (!availableServicesManager.isEmpty()) {
-			for (ServicesManager servicesManager : availableServicesManager) {
-				string += servicesManager;
-			}
-		}
-
-		string += " --- Ticket (" + demoTicket.getName() + ") --- ";
-		return string;
-	}
-
-
 	/* --- getters & setters --- */
 	public void setAvailableCount(int availableCount) {
 		this.availableCount = availableCount;
@@ -63,7 +40,7 @@ public class TicketManager {
 		return availableServicesManager.size();
 	}
 
-	private ServicesManager getServicesManager() {
+	public ServicesManager getServicesManager() {
 		if (!printServicesManagersIndex()) {
 			return null;
 		}
@@ -80,7 +57,7 @@ public class TicketManager {
 		}
 	}
 
-	private boolean printServicesManagersIndex() {
+	public boolean printServicesManagersIndex() {
 		if (availableServicesManager == null || availableServicesManager.isEmpty()) {
 			System.out.println("Services managers list is empty");
 			return false;
@@ -138,36 +115,5 @@ public class TicketManager {
 	}
 	/* --- others --- */
 
-	/* --- static methods --- */
-	public static TicketManager newTicketManager() {
-		TicketManager ticketManager = new TicketManager();
-		Ticket demoTicket;
-		int availableCount;
 
-		demoTicket = Ticket.newTicket();
-		availableCount = Main.enterIntValue("Available count of this ticket: ", 0, 5);
-
-		ticketManager.setDemoTicket(demoTicket);
-		ticketManager.setAvailableCount(availableCount);
-
-		while (true) {
-			ServicesManager servicesManager;
-			int continuationFlag;
-
-			continuationFlag = Main.enterIntValue("\nAdd services group? (0 - no, 1 - ok): ", 0, 1);
-			if (continuationFlag == 0) {
-				break;
-			}
-
-			System.out.printf("\n<Adding services group No%d>\n", ticketManager.getServicesManagersCount() + 1);
-			servicesManager = ServicesManager.newServicesManager();
-			System.out.printf("<Adding services group No%d>\n", ticketManager.getServicesManagersCount() + 1);
-
-			if (servicesManager != null) {
-				ticketManager.addServicesManager(servicesManager);
-			}
-		}
-
-		return ticketManager;
-	}
 }
